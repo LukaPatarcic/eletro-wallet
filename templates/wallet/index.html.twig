@@ -1,0 +1,220 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Electro Wallet{% endblock %}
+
+{% block body %}
+    <!--Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
+        <a class="navbar-brand font-weight-bold " href="#">Electro Wallet</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+                aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+            <ul class="navbar-nav ml-auto mr-5">
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">
+                        <i class="fa fa-info"></i> About
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">
+                        <i class="fa fa-address-book"></i> Contact</a>
+                </li>
+                {% if is_granted("ROLE_USER") %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_dashboard') }}">
+                            <i class="fa fa-user-alt"></i> Profile </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">
+                            <i class="fa fa-sign-out-alt"></i> Log Out </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link"href="{{ path('app_register') }}">
+                            <i class="fa fa-user-plus"></i> Register </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">
+                            <i class="fa fa-sign-in-alt"></i> Log In </a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+<main>
+    <div class="jumbotron bg-jumbotron m-0">
+        <div class="text-dark  text-center py-5 px-4 my-5">
+            <div>
+                <img class="img-fluid" src="{{ asset('build/images/logo.4f4d7c9c.png') }}" width="200">
+                <h1 class="card-title h1-responsive pt-3 mb-4 font-weight-bold text-uppercase">
+                    Electro Wallet
+                </h1>
+                <hr class="border-dark custom w-25 rounded-circle">
+                <p class="mx-5 my-4 font-weight-bold">
+                    The best place to see what you spend and how much you spend!
+                </p>
+                {% if not is_granted("ROLE_USER") %}
+                    <a class="btn btn-primary" href="#about"><i class="fas fa-search-dollar left"></i> Learn More</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if not is_granted("ROLE_USER") %}
+        <section class="bg-about-us m-0 text-dark" id="about">
+            <!--Section heading-->
+            <h2 class="h2-responsive font-weight-bold mb-4 text-center">About us</h2>
+            <!--Section description-->
+            <p class="w-responsive mx-auto mb-5 text-center font-weight-bold">
+                This is filler text for about us
+            </p>
+            <hr class="hr-dark hr-bold" width="50%">
+            <div class="container">
+                <div class="row text-dark">
+                    <!--Grid column-->
+                    <div class="col-md-4 col-sm-12">
+                        <div class="text-center mb-5">
+                            <i class="fa fa-chart-pie fa-6x zoomIn text-shadow"></i>
+                        </div>
+                        <div class="card">
+                            <div class="card-body bg-primary rounded">
+                                <p class="text-justify text-white">
+                                    View your expenses and earnings in beautiful charts. View them by type,date and other...
+                                    Compare two periods as see if you spent more or less...
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="text-center mb-5">
+                            <i class="fa fa-table fa-6x zoomIn text-shadow"></i>
+                        </div>
+                        <div class="card">
+                            <div class="card-body bg-primary rounded">
+                                <p class="text-justify text-white">
+                                    View your all your transactions in a table. Search for specific dates,
+                                    types or anything else... Editing or deleting them... All in one place.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="text-center mb-5">
+                            <i class="fa fa-dollar-sign fa-6x zoomIn text-shadow"></i>
+                        </div>
+                        <div class="card">
+                            <div class="card-body bg-primary rounded">
+                                <p class="text-justify text-white">
+                                    Managing your expenses... Adding custom transaction names... Deleting them if you don't want them anymore... And many many more
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 text-center my-5">
+                        <a href="{{ path("app_register") }}" class="btn-outline-dark btn">Register now!</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="pt-5 text-dark" id="contact">
+
+        <h2 class="h1-responsive font-weight-bold text-center mb-3">Contact us</h2>
+
+        <p class="text-center w-responsive mx-auto mb-5 font-weight-bold">
+            Do you have any questions? Please do not hesitate
+            to contact us directly.
+        </p>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12 col-md-6 offset-md-3">
+                    {% include "includes/contactus.html.twig" %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+</main>
+    <footer class="page-footer font-small bg-primary pt-4">
+
+        <div class="container-fluid text-center text-md-left">
+
+            <div class="row">
+
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <h5 class="text-uppercase">Electro Wallet</h5>
+                    <p>The best place to see what you spend and how much you spend!</p>
+
+                </div>
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <div class="col-md-3 mb-md-0 mb-3">
+
+
+                    <h5 class="text-uppercase">Social Media</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!"><i class="fab fa-facebook-f"></i> Facebook</a>
+                        </li>
+                        <li>
+                            <a href="#!"><i class="fab fa-twitter"></i> Twitter</a>
+                        </li>
+                        <li>
+                            <a href="#!"><i class="fab fa-instagram"></i> Instagram</a>
+                        </li>
+                        <li>
+                            <a href="#!"><i class="fa fa-fill"></i> Filler</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <h5 class="text-uppercase">Website</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('app_homepage') }}"><i class="fa fa-home"></i> Home</a>
+                        </li>
+                        {% if is_granted("ROLE_USER") %}
+                            <li>
+                                <a href="{{ path('app_logout') }}"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('app_login') }}"><i class="fa fa-sign-in-alt"></i> Login</a>
+                            </li>
+                        {% endif %}
+
+                        <li>
+                            <a href="{{ path('app_register') }}"><i class="fa fa-user-plus"></i> Register</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_dashboard') }}"><i class="fa fa-user"></i> User Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-copyright text-center py-3">© {{ "now"|date("Y") }} Copyright:
+            <a href="http://secondsection.in.rs"> undefined;</a>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('main') }}
+
+{% endblock %}

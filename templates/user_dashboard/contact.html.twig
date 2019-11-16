@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+{% block body %}
+    {% include 'includes/navbar.html.twig' %}
+    {% include 'includes/sidebar.html.twig' %}
+    <!--Main Navigation-->
+    <!--Main layout-->
+    <main class="pt-5 mx-lg-5">
+        <div class="container-fluid mt-5">
+
+            <!-- Heading -->
+            <div class="card mb-4 wow fadeIn">
+
+                <!--Card content-->
+                <div class="card-body d-sm-flex justify-content-between">
+
+                    <h4 class="mb-2 mb-sm-0 pt-1">
+                        <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                        <span>/</span>
+                        <span>Contact</span>
+                    </h4>
+
+                </div>
+            </div>
+            <!-- Heading -->
+        </div>
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header text-center text-warning">
+                            <h1 class="font-weight-bold">Contact Us</h1>
+                        </div>
+                        <div class="card-body">
+                            {% include 'includes/contactus.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main><br><br><br><br><br><br><br>
+
+    {% include 'includes/footer.html.twig' %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{  encore_entry_script_tags('dashboard') }}
+    {{  encore_entry_script_tags('main') }}
+{% endblock %}

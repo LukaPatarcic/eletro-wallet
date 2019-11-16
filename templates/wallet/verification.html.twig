@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('user') }}
+{% endblock %}
+
+{% block title %}Verification message{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-md-6 offset-md-3 col-sm-12">
+                <div class="row mb-5">
+                    <div class="col-md-4 col-sm-12 text-center">
+                        <a href="{{ path('app_homepage') }}"><img class="float-md-right" src="{{ asset('build/images/logo.png') }}" width="100"></a>
+                    </div>
+                    <div class="col-md-8 col-sm-12 pt-3">
+                        <a href="/"><h1 class="text-dark font-weight-bold text-center">ELECTRO WALLET</h1></a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title bg-primary border-bottom p-3" align="center">
+                        <h2 class="text-center text-light font-weight-bold">Registration Form</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5 class="text-center text-success">Thank you for registering.<br>
+                                    A verification email has been sent.</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        If you didn't receive a confirmation email click the <a href="#">link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+{% endblock %}

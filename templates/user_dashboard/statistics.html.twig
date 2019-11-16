@@ -1,0 +1,290 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+{% block body %}
+    {% include 'includes/navbar.html.twig' %}
+    {% include 'includes/sidebar.html.twig' %}
+    <!--Main Navigation-->
+    <!--Main layout-->
+
+    <main class="pt-5 mx-lg-5">
+        <div class="container-fluid mt-5">
+
+            <!-- Heading -->
+            <div class="card mb-4 wow fadeIn">
+
+                <!--Card content-->
+                <div class="card-body d-sm-flex justify-content-between">
+
+                    <h4 class="mb-2 mb-sm-0 pt-1">
+                        <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                        <span>/</span>
+                        <span>Statistics</span>
+                    </h4>
+                </div>
+            </div>
+            <!-- Heading -->
+        </div>
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card mb-5 p-3">
+                        <h3 class="text-center h3-responsive text-primary font-weight-bold">Total Stats</h3>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 mb-5">
+                    <div class="card" id="incomeIntro">
+                        <div class="card-header">
+                            <h3 class="text-center text-success font-weight-bold">Income stats</h3>
+                        </div>
+                        <div class="card-body">
+                            <h1 id="incomeMessage" class="text-center text-danger"></h1>
+                            <canvas id="income"></canvas>
+                        </div>
+                        <div class="card-footer">
+                            <p id="other-stats-2"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 mb-5">
+                    <div class="card" id="outcomeIntro">
+                        <div class="card-header">
+                            <h3 class="text-center text-danger font-weight-bold">Outcome stats</h3>
+                        </div>
+                        <div class="card-body">
+                            <h1 id="outcomeMessage" class="text-center text-danger"></h1>
+                            <canvas id="outcome"></canvas>
+                        </div>
+                        <div class="card-footer">
+                            <p id="other-stats-1"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-12 mb-5">
+                    <div class="card" id="customSearchIntro">
+                        <div class="card-header">
+                            <h3 class="text-center font-weight-bold text-dark">Search for stats</h3>
+                        </div>
+                        <div class="card-body">
+                            <form name="search">
+                                <select class="custom-select mb-3" id="selectTime">
+                                    <option value="" selected>Select a type</option>
+                                    <option value="day">Day</option>
+                                    <option value="month">Month</option>
+                                    <option value="year">Year</option>
+                                </select>
+
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" id="incomeRadio" name="type" value="income">
+                                    <label class="form-check-label text-muted" for="incomeRadio">income</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" id="outcomeRadio" name="type" value="outcome">
+                                    <label class="form-check-label text-muted" for="outcomeRadio">outcome</label>
+                                </div>
+
+                                <div class="md-form" id="date-picker-div">
+                                    <input placeholder="Selected date" type="text" id="date-picker" class="form-control datepicker" name="day">
+                                    <label for="date-picker">Pick a date</label>
+                                </div>
+                                <div class="row my-4" >
+                                    <div class="col-sm-6" id="year-picker">
+                                        <select class="custom-select" id="year" name="year">
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6" id="month-picker">
+                                        <select class="custom-select" id="month" name="month">
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-block mt-3"><i class="fa fa-search-dollar"></i> Search</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-7 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-center text-primary font-weight-bold">Custom stats</h3>
+                        </div>
+                        <div class="card-body" id="statsChartDiv">
+                            <h1 id="customStatsMessage" class="text-center text-danger"></h1>
+                            <canvas id="customStats"></canvas>
+                        </div>
+                        <div class="card-footer">
+                            <p id="other-stats-3"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 mt-5" id="compareStatsHere">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-center text-primary font-weight-bold">Compare stats</h3>
+                        </div>
+                        <div class="card-body" id="statsChartDiv">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 offset-md-3 mb-3" align="center">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="incomeRadio2" name="type2" value="income" required>
+                                        <label class="form-check-label text-muted" for="incomeRadio2">income</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="outcomeRadio2" name="type2" value="outcome" required>
+                                        <label class="form-check-label text-muted" for="outcomeRadio2">outcome</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="types">
+{#                                TODO: types of income/outcome#}
+                            </div>
+                            <div class="row" id="compareStatsDiv">
+                                <div class="col-sm-12 col-md-3 mb-sm-3">
+                                    <select class="custom-select" id="year-compare-1" name="year" required>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-3 mb-sm-3">
+                                    <select class="custom-select" id="month-compare-1" name="year" required>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-3 mb-sm-3">
+                                    <select class="custom-select" id="year-compare-2" name="year" required>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-3 mb-sm-3">
+                                    <select class="custom-select" id="month-compare-2" name="year" required>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 mb-3">
+                                    <button class="btn btn-primary btn-block" id="compare-stats-btn">Search</button>
+                                </div>
+                            </div>
+                            <hr>
+                            <h1 id="compareStatsMessage" class="text-center text-danger"></h1>
+                            <canvas id="compareStats"></canvas>
+                        </div>
+                        <div class="card-footer">
+                            <p id="other-stats-4"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% include 'includes/footer.html.twig' %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        function pieChart(names,amounts,id) {
+
+            var ctxP = document.getElementById(id).getContext('2d');
+            var colors =  poolColors(names.length);
+            var myPieChart = new Chart(ctxP, {
+                type: '{{ app.user.chartType }}',
+                data: {
+                    labels: names,
+                    title: '',
+                    datasets: [{
+                        data: amounts,
+                        backgroundColor: colors.pool,
+                        hoverBackgroundColor: colors.poolDarker
+                    }]
+                },
+                options: {
+                    responsive: true,
+                }
+            });
+            function dynamicColors() {
+                var r = Math.floor(Math.random() * 255);
+                var g = Math.floor(Math.random() * 255);
+                var b = Math.floor(Math.random() * 255);
+                return "rgba(" + r + "," + g + "," + b + ", 0.9)";
+            }
+            function poolColors(a) {
+                var pool = [];
+                var poolDarker = [];
+                for(i = 0; i < a; i++) {
+                    pool.push(dynamicColors());
+                    poolDarker.push(pool[i].replace(/[^,]+(?=\))/, '0.6'))
+                }
+                return {
+                    pool,
+                    poolDarker
+                };
+            }
+        }
+    </script>
+    {% if not app.user.hasTutorial %}
+        {{ encore_entry_script_tags('dashboard') }}
+        {{ encore_entry_script_tags('stats') }}
+    {% else %}
+        {{ encore_entry_script_tags('intro') }}
+        <script>
+            var names = ['one','two','three'];
+            var amounts = ['123543','34534','3464'];
+            pieChart(names,amounts,'income');
+            pieChart(names,amounts,'outcome');
+            var introJs = introJs();
+            introJs.setOptions({
+                steps: [
+                    {
+                        intro: "Now this is what im talking about... Charts 📉"
+                    },
+                    {
+                        element: '#incomeIntro',
+                        intro: 'Your total income statistics in your favorite chart type',
+                        position: 'bottom',
+                    },
+                    {
+                        element: '#outcomeIntro',
+                        intro: 'Your total outcome statistics in your favorite chart type',
+                        position: 'bottom',
+                    },
+                    {
+                        element: '#customSearchIntro',
+                        intro: 'By far the coolest feature. Search for a day,month or year and see your statistics in a beautiful chart 🥧',
+                        position: 'bottom',
+                    },
+                    {
+                        element: '#compareStatsHere',
+                        intro: 'One more cool feature is comparing 2 periods... Enter 2 months and see how much you spent or earned',
+                        position: 'bottom'
+                    },
+                    {
+                        intro: 'Woohoo we did it. Now it\'s time to go and make some transactions and start your Electro Wallet journey 🚋',
+                    },
+                ],
+                disableInteraction: 'true',
+            });
+            introJs.start().onexit(function () {
+                $.ajax({
+                    url: '/api/user/tutorial',
+                    type: 'POST'
+                });
+
+                let type = ['income', 'income', 'outcome', 'outcome', 'outcome'];
+                let name = ['Salary', 'Freelancing', 'Grocery', 'Bills for house', 'Bills for school'];
+                for (let i=0; i<=4; i++) {
+                    $.ajax({
+                        url: '/api/customTransaction/add',
+                        type: 'POST',
+                        data: {
+                            type: type[i],
+                            name: name[i]
+                        }
+                    })
+                }
+            });
+        </script>
+    {% endif %}
+{% endblock %}

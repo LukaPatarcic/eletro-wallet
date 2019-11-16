@@ -1,0 +1,39 @@
+<form id="contact-form" name="contact-form">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="md-form mb-0">
+                <input type="text" id="name" name="name" class="form-control">
+                <label for="name" class="text-dark"><i class="fas fa-user"></i> Your name</label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="md-form mb-0">
+                <input type="text" id="email" name="email" class="form-control">
+                <label for="email" class="text-dark"><i class="fa fa-envelope"></i> Your email</label>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="md-form mb-0">
+        <input type="text" id="subject" name="subject" class="form-control">
+        <label for="subject" class="text-dark"><i class="fas fa-tag"></i> Subject</label>
+    </div>
+
+    <div class="md-form">
+        <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+        <label for="message" class="text-dark"><i class="fas fa-pencil-alt"></i> Your message</label>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-outline-warning">Send</button>
+        </div>
+        <div class="col-sm-9">
+            <div class="alert" id="displayMessage">
+            </div>
+        </div>
+    </div>
+</form>

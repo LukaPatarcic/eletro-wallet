@@ -1,0 +1,196 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+{% block body %}
+    {% include 'includes/navbar.html.twig' %}
+    {% include 'includes/sidebar.html.twig' %}
+    <!--Main Navigation-->
+    <!--Main layout-->
+    <main class="pt-5 mx-lg-5">
+        <div class="container-fluid mt-5">
+            <div class="card mb-4 wow fadeIn">
+                <div class="card-body d-sm-flex justify-content-between">
+                    <h4 class="mb-2 mb-sm-0 pt-1">
+                        <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                        <span>/</span>
+                        <span>Profile</span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <h1 class="h1-responsive text-center text-primary">Hello {{ app.user.profileName }}</h1>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="card mt-5" id="customTransactionTypes">
+                        <div class="card-header text-center text-primary font-weight-bold">
+                            Your transaction types
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" id="addCustomTransactionType">
+                                <div class="md-form">
+                                    <label for="transaction-name">Enter custom transaction name</label>
+                                    <input type="text" name="name" class="form-control name" id="transaction-name" required>
+
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input radio" id="incomeRadio" name="type" value="income" required>
+                                        <label class="form-check-label text-muted" for="incomeRadio">Income</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input radio" id="outcomeRadio" name="type" value="outcome" required>
+                                        <label class="form-check-label text-muted" for="outcomeRadio">Outcome</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-block mt-5">Add Custom Transaction</button>
+                                </div>
+                            </form>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Income types
+                                <button class="badge badge-primary" data-toggle="modal" data-target="#showMoreModal" data-whatever="income">Show all</button>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Outcome types
+                                <button class="badge badge-primary" data-toggle="modal" data-target="#showMoreModal" data-whatever="outcome">Show all</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal fade" id="showMoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="exampleModalLabel"></h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Income types
+                                            <button class="badge badge-danger">Delete</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 mt-5">
+                    <div class="card" id="userSettings">
+                        <div class="card-header">
+                            <h2 class="text-center text-primary">User Settings</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <a href="{{ path('user_username_change') }}" class="btn btn-primary btn-block">Change Username</a>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <a href="{{ path('user_email_change') }}" class="btn btn-primary btn-block">Change Email</a>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <a href="{{ path('user_password_change') }}" class="btn btn-primary btn-block">Change Password</a>
+                                </div>
+                            </div>
+                            <hr>
+                            <div>
+                                <h4 class="text-primary"><label for="chartType"><i class="fa fa-chart-pie text-warning"></i>Change chart type</label></h4>
+                                <select class="custom-select" name="chartType" id="chartType">
+                                    <option value="pie">Pie</option>
+                                    <option value="bar">Bar</option>
+                                    <option value="horizontalBar">Horizontal Bar</option>
+                                    <option value="line">Line</option>
+                                    <option value="radar">Radar</option>
+                                    <option value="doughnut">Doughnut</option>
+                                    <option value="polarArea">Polar Area</option>
+                                </select>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="card mt-5">
+                        <div class="card-header text-center text-primary font-weight-bold">
+                            <span>Amount in wallet</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form action="" accept-charset="UTF-8" method="get">
+                                        <div class="input-group">
+                                            <button class="btn btn-primary btn-sm my-0 p waves-effect waves-light" type="submit"><i class="fas fa-money-bill-wave"></i></button>
+                                            <input class="form-control" type="text" value="{{ app.user.balance|number_format(2, '.', ',') }}" disabled>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </main>
+    {% include 'includes/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('dashboard') }}
+    {{ encore_entry_script_tags('profile') }}
+    {% if app.user.hasTutorial %}
+    {{ encore_entry_script_tags('intro') }}
+    <script>
+        var introJs = introJs();
+        introJs.setOptions({
+            steps: [
+                {
+                    intro: "Welcome to your profile {{ app.user.profileName }}. Here you will be able to add your transaction types change charts and other stuff..."
+                },
+                {
+                    element: '#customTransactionTypes',
+                    intro: 'Here is your secret place where you add your desired transaction names 😊. It\'s simple just type the name and set either income or outcome. Plus you can edit and delete them at any time',
+                    position: 'bottom',
+                },
+                {
+                    element: '#userSettings',
+                    intro: 'Change you email,username and password plus your desired chart type 📊 here with just one click ',
+                    position: 'left'
+                },
+                {
+                    intro: 'Great job... There are a few things still left to show you but it will be very fun I promise.😄 ',
+                }
+            ],
+            disableInteraction: 'true',
+        });
+        introJs.start().onexit(function() {
+            window.location.href = '/user/dashboard/tables?multipage=true';
+        });
+    </script>
+    {% endif %}
+    <script>
+        $('select[name="chartType"] option').each(function () {
+            if($(this).val() === '{{ app.user.chartType }}') {
+                $(this).attr('selected','selected');
+            }
+        });
+        {% for message in app.flashes('success') %}
+        toast.success('{{ message }}');
+        {% endfor %}
+    </script>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+{% block body %}
+    {% include 'includes/navbar.html.twig' %}
+    {% include 'includes/sidebar.html.twig' %}
+    <main class="pt-5 mx-lg-5">
+        <div class="container-fluid mt-5">
+            <div class="card mb-4 wow fadeIn">
+                <div class="card-body d-sm-flex justify-content-between">
+                    <h4 class="mb-2 mb-sm-0 pt-1">
+                        <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                        <span>/</span>
+                        <a href="{{ path('app_dashboard_profile') }}">Profile</a>
+                        <span>/</span>
+                        <span>Settings</span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 offset-md-3">
+                    <form class="card" method="POST">
+                        {% if type == "username" %}
+                        <div class="card-header text-center text-warning">
+                            <h1 class="font-weight-bold">Change Username</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="md-form">
+                                <label for="username"><i class="fa fa-user"></i> Change Username</label>
+                                <input id="username" type="text" class="form-control" name="username" required>
+                                <button class="btn btn-primary btn-block">Change</button>
+                            </div>
+                            {% elseif type == "email" %}
+                                <div class="card-header text-center text-warning">
+                                    <h1 class="font-weight-bold">Change Email</h1>
+                                </div>
+                                <div class="card-body">
+                                    <div class="md-form">
+                                        <label for="email"><i class="fa fa-envelope"></i> Change Email</label>
+                                        <input id="email" type="email" class="form-control" name="email" required>
+                                        <button class="btn btn-primary btn-block">Change</button>
+                                    </div>
+                                </div>
+                            {% elseif type == "password" %}
+                                <div class="card-header text-center text-warning">
+                                    <h1 class="font-weight-bold">Change Password</h1>
+                                </div>
+                                <div class="card-body">
+                                    <div class="md-form">
+                                        <label for="password1"><i class="fa fa-key"></i> Old Password</label>
+                                        <input id="password1" type="password" class="form-control" name="oldPassword">
+                                    </div>
+                                    <div class="md-form">
+                                        <label for="password1"><i class="fa fa-key"></i> Change Password</label>
+                                        <input id="password1" type="password" class="form-control" name="password1">
+                                    </div>
+                                    <div class="md-form">
+                                        <label for="password2"><i class="fa fa-key"></i> Confirm Password</label>
+                                        <input id="password2" type="password" class="form-control" name="password2" >
+                                        <button class="btn btn-primary btn-block" name="">Change</button>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main><br><br><br><br><br><br><br><br><br><br>
+    {% include 'includes/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{  encore_entry_script_tags('dashboard') }}
+    {{  encore_entry_script_tags('main') }}
+    <script>
+        {% for message in app.flashes('error') %}
+        toast.error('{{ message }}');
+        {% endfor %}
+    </script>
+{% endblock %}

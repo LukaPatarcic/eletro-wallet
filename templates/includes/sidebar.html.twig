@@ -1,0 +1,27 @@
+<!-- Sidebar -->
+<div class="sidebar-fixed position-fixed">
+
+    <div class="py-5" align="center">
+        <a href="{{ path('app_dashboard') }}">
+            <img src="{{ asset('build/images/logo.png') }}" alt="Logo" width="100">
+            <h3 class="text-dark">Electro Wallet</h3>
+        </a>
+    </div>
+
+    <div class="list-group list-group-flush">
+        <a href="{{ path('app_dashboard') }}" class="list-group-item list-group-item-action waves-effect home">
+            <i class="fas fa-chart-pie mr-3"></i>Dashboard
+        </a>
+        <a href="{{ path('app_dashboard_profile') }}" class="list-group-item list-group-item-action waves-effect profile">
+            <i class="fas fa-user mr-3"></i>Profile</a>
+        <a href="{{ path('app_dashboard_tables') }}" class="list-group-item list-group-item-action waves-effect tables">
+            <i class="fas fa-table mr-3"></i>Tables</a>
+        <a href="{{ path('app_dashboard_statistics') }}" class="list-group-item list-group-item-action waves-effect statistics">
+            <i class="fas fa-percentage mr-3"></i>Statistics</a>
+        <a href="{{ path('app_logout') }}" class="list-group-item list-group-item-action waves-effect">
+            <i class="fas fa-sign-out-alt mr-3"></i>Log Out</a>
+    </div>
+
+</div>
+
+<!-- Sidebar -->

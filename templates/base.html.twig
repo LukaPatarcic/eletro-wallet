@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+    <html lang="en">
+    <head>
+        <title>{% block title %} Electro Wallet {% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        {% endblock %}
+        {% include 'includes/favicon.html.twig' %}
+        <meta charset="utf-8">
+    </head>
+    <body>
+        {% block body %} {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>

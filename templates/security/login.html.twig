@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('user') }}
+{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-12 col-md-12 col-lg-6 mt-5">
+            <div class="card-img mt-5" align="center">
+                <a href="/">
+                    <img src="{{ asset('build/images/logo.4f4d7c9c.png') }}" alt="Logo" width="250">
+                    <h1 class="mt-3 text-dark font-weight-bold">ELECTRO WALLET</h1>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4 offset-lg-1 mt-5">
+            <div class="card">
+                <div class="card-title bg-primary border-bottom p-3" align="center">
+                    <h2 class="text-center text-light font-weight-bold">Log In</h2>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endif %}
+                                {% for flashes in app.flashes('success') %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ flashes }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endfor %}
+                                <div class="md-form">
+                                    <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                                    <input class="form-control" type="text" id="email" name="email" autofocus value="{{ last_username }}" required>
+                                </div>
+                                <div class="md-form">
+                                    <label for="password"><i class="fas fa-key"></i> Password</label>
+                                    <input class="form-control" type="password" id="password"  name="password" required>
+                                </div>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                <div class="form-check my-4 pl-0">
+                                    <input type="checkbox" class="form-check-input" id="remember" name="_remember_me">
+                                    <label class="custom-control-label mr-4" for="remember">Remember Me</label>
+                                    <a href="#">Forgot Password?</a>
+                                </div>
+
+                                <button type="submit" class="btn btn-block btn-primary"><i class="fa fa-sign-in-alt"></i> Sign In</button>
+                                <hr>
+                                <p class="text-center">Don't have an account? <a href="{{ path('app_register') }}">Register</a> </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

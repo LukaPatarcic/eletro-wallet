@@ -1,0 +1,1 @@
+import '../../node_modules/mdbootstrap/js/addons/datatables.min'
