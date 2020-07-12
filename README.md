@@ -10,6 +10,7 @@
 ### How to install:
 ```sh
 $ composer install
+$ php bin/console doctrine:database:create
 $ php bin/console doctrine:migrations:migrate
 $ npm install
 $ yarn encore dev
