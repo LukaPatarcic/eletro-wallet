@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,19 +30,16 @@ class WalletController extends AbstractController
     /**
      * @Route("/verify/email/{hashedEmail}", name="app_verification_email")
      */
-    public function verificationEmail($hashedEmail, UserRepository $userRepository, EntityManagerInterface $em)
+    public function verificationEmail(User $user, EntityManagerInterface $em)
     {
-        if($hashedEmail) {
-            $user = $userRepository->findOneBy(['hashedEmail' => $hashedEmail]);
-            if($user->getHashedEmail() === $hashedEmail) {
-                $user->setVerified(1);
-                $em->flush();
-                $this->addFlash('success','Congratulations you have verified your account');
-                return $this->redirectToRoute('app_login');
-            }
-            return $this->redirectToRoute('app_homepage');
+        if($user) {
+            $user->setVerified(1);
+            $em->flush();
+            $this->addFlash('success','Congratulations you have verified your account');
+            return $this->redirectToRoute('app_login');
         }
-        return $this->render('mail/verify.html.twig');
+
+        return $this->redirectToRoute('app_homepage');
     }
 
 }

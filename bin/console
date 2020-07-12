@@ -19,7 +19,7 @@ if (!class_exists(Application::class)) {
 }
 
 $input = new ArgvInput();
-if (null !== $env = $input->getParameterOption(['--env', '-e'], null, true)) {
+if (null !== $env = $input->getParameterOption(['--.env', '-e'], null, true)) {
     putenv('APP_ENV='.$_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = $env);
 }
 

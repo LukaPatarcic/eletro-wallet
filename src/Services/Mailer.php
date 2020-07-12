@@ -6,37 +6,27 @@ namespace App\Services;
 use App\Entity\User;
 use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 use Twig\Environment;
+use Swift_Mailer;
 
 class Mailer
 {
     /**
-     * @var \Swift_SmtpTransport
+     * @var \Swift_Mailer
      */
-    private $transport;
+    private $mailer;
     /**
      * @var TwigExtension
      */
     private $twig;
 
-    public function __construct(Environment $twig)
+    public function __construct(Environment $twig, Swift_Mailer $mailer)
     {
-        // Create the Transport
-        $transport = (new \Swift_SmtpTransport(
-            'smtp.gmail.com',
-            '587',
-            'tls'
-        ))
-            ->setUsername('lukaphptesting@gmail.com')
-            ->setPassword('undefined2019;')
-        ;
-
-        $this->transport = $transport;
+        $this->mailer = $mailer;
         $this->twig = $twig;
     }
 
     public function send(string $email,string $name,string $subject,string $message)
     {
-        $mailer = new \Swift_Mailer($this->transport);
         // Create a message
         $emailMessage = (new \Swift_Message('Verification Email'))
             ->setFrom([$email => $name])
@@ -45,20 +35,19 @@ class Mailer
             ->setBody($message,'text/html')
         ;
 
-        return $mailer->send($emailMessage);
+        return $this->mailer->send($emailMessage);
     }
 
     public function verification(User $user)
     {
-        $mailer = new \Swift_Mailer($this->transport);
         // Create a message
         $emailMessage = (new \Swift_Message('Verification Email'))
-            ->setFrom(['electro@wallet.com' => 'Electro Wallet'])
+            ->setFrom(['luka@lukaku.tech' => 'Electro Wallet'])
             ->setTo($user->getEmail())
             ->setSubject('Account Verification')
             ->setBody($this->twig->render('mail/verify.html.twig',['email' => md5($user->getEmail())]),'text/html')
         ;
 
-        return $mailer->send($emailMessage);
+        return $this->mailer->send($emailMessage);
     }
 }

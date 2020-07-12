@@ -5,11 +5,11 @@ global.$ = $;
 global.jQuery = jQuery;
 
 import 'bootstrap'
-import '../../node_modules/mdbootstrap/js/modules/chart'
-import '../../node_modules/mdbootstrap/js/modules/forms-free'
-import '../../node_modules/mdbootstrap/js/modules/enhanced-modals'
-import '../../node_modules/mdbootstrap/js/modules/waves'
-import '../../node_modules/mdbootstrap/js/modules/velocity.min'
+import '../../node_modules/mdbootstrap/js/modules/chart.js'
+import '../../node_modules/mdbootstrap/js/modules/forms-free.js'
+import '../../node_modules/mdbootstrap/js/modules/enhanced-modals.js'
+import '../../node_modules/mdbootstrap/js/modules/waves.js'
+import '../../node_modules/mdbootstrap/js/modules/velocity.min.js'
 import 'toastr'
 import toastr from "toastr";
 
